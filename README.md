@@ -1,13 +1,16 @@
-Package in Maven:
-  <groupId>CrudFirst</groupId>
-  <artifactId>CrudFirst</artifactId>
+Package in Maven:  
+```
+  <groupId>CrudFirst</groupId>  
+  <artifactId>CrudFirst</artifactId>  
   <version>1.0</version>
-  <packaging>war</packaging>
+  <packaging>war</packaging>  
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
+  
   <dependencies>
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -35,6 +38,7 @@ Package in Maven:
       <version>8.0.17</version>
     </dependency>
   </dependencies>
+  
   <build>
     <finalName>CrudFirst</finalName>
     <pluginManagement>
@@ -70,3 +74,4 @@ Package in Maven:
       </plugins>
     </pluginManagement>
    </build>`
+```
