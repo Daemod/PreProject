@@ -16,7 +16,7 @@ public class DeleteUserServlet extends HttpServlet {
         try {
             service.deleteUser(Long.parseLong(req.getParameter("id")));
             resp.setStatus(200);
-            resp.sendRedirect("/");
+            resp.sendRedirect(req.getContextPath().split("deleteUser")[0]);
         } catch (SQLException e) {
             resp.setStatus(500);
         }

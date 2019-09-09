@@ -19,7 +19,7 @@ public class NewUserServlet extends HttpServlet {
                     req.getParameter("work"),
                     Integer.parseInt(req.getParameter("age")));
             resp.setStatus(200);
-            resp.sendRedirect("/");
+            resp.sendRedirect(req.getContextPath().split("addUser")[0]);
         } catch (SQLException e) {
             resp.setStatus(500);
         }

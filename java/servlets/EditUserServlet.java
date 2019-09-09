@@ -22,7 +22,7 @@ public class EditUserServlet extends HttpServlet {
         try {
             service.editUser(user.getId(),user.getName(),user.getWork(),user.getAge());
             resp.setStatus(200);
-            resp.sendRedirect("/");
+            resp.sendRedirect(req.getContextPath().split("editUser")[0]);
         } catch (SQLException e) {
             resp.setStatus(500);
         }
