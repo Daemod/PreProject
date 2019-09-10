@@ -1,6 +1,6 @@
 package service;
 
-import DAO.UserDao;
+import DAO.HibernateUserDao;
 import model.User;
 import org.hibernate.SessionFactory;
 import util.DBHelper;
@@ -25,24 +25,24 @@ public class UserService {
     }
 
     public List<User> getAllUsers() throws SQLException {
-        return new UserDao(factory.openSession()).getAllUsers();
+        return new HibernateUserDao(factory.openSession()).getAllUsers();
     }
 
     public void addUser(String name, String work, int age) throws SQLException {
-        new UserDao(factory.openSession()).addUser(name, work, age);
+        new HibernateUserDao(factory.openSession()).addUser(name, work, age);
     }
 
     public void deleteUser(long id) throws SQLException {
-        new UserDao(factory.openSession()).deleteUser(id);
+        new HibernateUserDao(factory.openSession()).deleteUser(id);
     }
 
     public void editUser(long id, String name, String work, int age) throws SQLException {
-        new UserDao(factory.openSession()).editUser(id, name, work, age);
+        new HibernateUserDao(factory.openSession()).editUser(id, name, work, age);
     }
 
     private void createTable(){
         try {
-            new UserDao(factory.openSession()).createTable();
+            new HibernateUserDao(factory.openSession()).createTable();
         } catch (SQLException e) {
             e.printStackTrace();
         }
