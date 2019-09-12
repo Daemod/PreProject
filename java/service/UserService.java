@@ -1,6 +1,7 @@
 package service;
 
 import DAO.UserDaoFactory;
+import DAO.UserDaoFactoryImpl;
 import model.User;
 
 import java.sql.SQLException;
@@ -9,9 +10,10 @@ import java.util.List;
 public class UserService {
 
     private static UserService service;
+    private UserDaoFactory factory;
 
     private UserService() {
-
+        factory = UserDaoFactoryImpl.getInstance();
     }
 
     public static UserService getInstance() {
@@ -22,19 +24,19 @@ public class UserService {
     }
 
     public List<User> getAllUsers() throws SQLException {
-        return UserDaoFactory.getUserDao().getAllUsers();
+        return factory.getUserDao().getAllUsers();
     }
 
     public void addUser(String name, String work, int age) throws SQLException {
-        UserDaoFactory.getUserDao().addUser(name, work, age);
+        factory.getUserDao().addUser(name, work, age);
     }
 
     public void deleteUser(long id) throws SQLException {
-        UserDaoFactory.getUserDao().deleteUser(id);
+        factory.getUserDao().deleteUser(id);
     }
 
     public void editUser(long id, String name, String work, int age) throws SQLException {
-        UserDaoFactory.getUserDao().editUser(id, name, work, age);
+        factory.getUserDao().editUser(id, name, work, age);
     }
 
 

@@ -6,10 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoJDBCimpl implements UserDao {
+public class UserDaoJDBCImpl implements UserDao {
     private Connection connection;
 
-    UserDaoJDBCimpl(Connection connection) {
+    UserDaoJDBCImpl(Connection connection) {
         this.connection = connection;
         try {
             createTable();
