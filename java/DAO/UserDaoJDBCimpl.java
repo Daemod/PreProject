@@ -6,10 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCUserDao implements UserDao {
+public class UserDaoJDBCimpl implements UserDao {
     private Connection connection;
 
-    public JDBCUserDao(Connection connection) {
+    UserDaoJDBCimpl(Connection connection) {
         this.connection = connection;
         try {
             createTable();
@@ -71,7 +71,7 @@ public class JDBCUserDao implements UserDao {
         statement.close();
     }
 
-    public void createTable() throws SQLException {
+    private void createTable() throws SQLException {
         Statement statement = connection.createStatement();
         statement.execute("create table if not exists users (id bigint auto_increment, name varchar(256), work varchar(256), age int, primary key (id))");
         statement.close();

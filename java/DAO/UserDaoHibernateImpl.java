@@ -2,17 +2,28 @@ package DAO;
 
 import model.User;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.hibernate.service.ServiceRegistry;
 
 import java.sql.*;
 import java.util.List;
 
-public class HibernateUserDao implements UserDao{
+public class UserDaoHibernateImpl implements UserDao{
     private Session session;
+    private static SessionFactory factory;
 
-    public HibernateUserDao(Session session) {
-        this.session = session;
+    public UserDaoHibernateImpl(Configuration config) {
+         if(factory == null) {
+             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
+             builder.applySettings(config.getProperties());
+             ServiceRegistry serviceRegistry = builder.build();
+             factory = config.buildSessionFactory(serviceRegistry);
+         }
+         session = factory.openSession();
     }
 
     public List<User> getAllUsers() throws SQLException {
@@ -62,7 +73,4 @@ public class HibernateUserDao implements UserDao{
         session.close();
     }
 
-    public void createTable() throws SQLException {
-
-    }
 }
