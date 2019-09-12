@@ -9,7 +9,8 @@ import java.util.Properties;
 
 public class PropertyReader {
     private String connector;
-    public PropertyReader(){
+
+    public PropertyReader() {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         Properties properties = new Properties();
         try {
@@ -22,7 +23,7 @@ public class PropertyReader {
         connector = properties.getProperty("connector");
     }
 
-    public String getProperty(){
+    public String getProperty() {
         return connector;
     }
 }
