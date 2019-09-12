@@ -24,7 +24,6 @@ public class UserDaoHibernateImpl implements UserDao{
              factory = config.buildSessionFactory(serviceRegistry);
          }
          session = factory.openSession();
-
     }
 
     public List<User> getAllUsers() throws SQLException {
