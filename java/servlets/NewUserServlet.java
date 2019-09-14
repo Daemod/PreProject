@@ -19,7 +19,8 @@ public class NewUserServlet extends HttpServlet {
                     req.getParameter("work"),
                     Integer.parseInt(req.getParameter("age")));
             resp.setStatus(200);
-            resp.sendRedirect(req.getContextPath().split("addUser")[0]);
+            req.setAttribute("users", service.getAllUsers());
+            req.getRequestDispatcher("/admin.jsp").forward(req, resp);
         } catch (SQLException e) {
             resp.setStatus(500);
         }

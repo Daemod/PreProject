@@ -9,15 +9,34 @@ public class User {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(name = "name")
+    @Column(name = "role")
+    private String role;
+    @Column(name = "name", unique = true)
     private String name;
+    @Column(name = "password")
+    private int password;
     @Column(name = "work")
     private String work;
     @Column(name = "age")
     private int age;
 
     public User(){
+    }
 
+    public int getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password.hashCode();
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public User(String name, String work, int age) {

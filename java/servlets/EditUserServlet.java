@@ -20,9 +20,10 @@ public class EditUserServlet extends HttpServlet {
                 req.getParameter("work"),
                 Integer.parseInt(req.getParameter("age")));
         try {
-            service.editUser(user.getId(),user.getName(),user.getWork(),user.getAge());
+            service.editUser(user.getId(), user.getName(), user.getWork(), user.getAge());
             resp.setStatus(200);
-            resp.sendRedirect(req.getContextPath().split("editUser")[0]);
+            req.setAttribute("users", service.getAllUsers());
+            req.getRequestDispatcher("/admin.jsp").forward(req, resp);
         } catch (SQLException e) {
             resp.setStatus(500);
         }

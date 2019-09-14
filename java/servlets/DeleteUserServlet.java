@@ -11,12 +11,14 @@ import java.sql.SQLException;
 
 public class DeleteUserServlet extends HttpServlet {
     private UserService service = UserService.getInstance();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             service.deleteUser(Long.parseLong(req.getParameter("id")));
             resp.setStatus(200);
-            resp.sendRedirect(req.getContextPath().split("deleteUser")[0]);
+            req.setAttribute("users", service.getAllUsers());
+            req.getRequestDispatcher("/admin.jsp").forward(req, resp);
         } catch (SQLException e) {
             resp.setStatus(500);
         }

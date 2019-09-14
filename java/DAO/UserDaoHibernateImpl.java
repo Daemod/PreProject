@@ -49,6 +49,15 @@ public class UserDaoHibernateImpl implements UserDao{
         return user;
     }
 
+    @Override
+    public User getUserByName(String name) throws SQLException {
+        Query query = session.createQuery("FROM User user where user.name = :name");
+        query.setParameter("name", name);
+        User user = (User) query.uniqueResult();
+        session.close();
+        return user;
+    }
+
 
     public void editUser(long id, String name, String work, int age) throws SQLException {
         Transaction transaction = session.beginTransaction();

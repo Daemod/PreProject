@@ -39,5 +39,13 @@ public class UserService {
         factory.getUserDao().editUser(id, name, work, age);
     }
 
+    public User getUserByName(String name) {
+        try {
+            return factory.getUserDao().getUserByName(name);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
 
 }

@@ -45,7 +45,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public User getUserById(long id) throws SQLException {
         Statement statement = connection.createStatement();
-        statement.execute("select * form users where id='" + id + "'");
+        statement.execute("select * form users where id = '" + id + "'");
         ResultSet set = statement.getResultSet();
         if (set.next()) {
             return new User(set.getLong("id"),
@@ -54,6 +54,23 @@ public class UserDaoJDBCImpl implements UserDao {
                     set.getInt("age"));
         }
         return null;
+    }
+
+    @Override
+    public User getUserByName(String name) throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.execute("select * from users where name = '" + name + "'");
+        ResultSet set = statement.getResultSet();
+        User user = null;
+        if(set.next()){
+            user = new User(set.getString("name"),
+                    set.getString("work"),
+                    set.getInt("age"));
+            user.setRole(set.getString("role"));
+        }
+        set.close();
+        statement.close();
+        return user;
     }
 
     public void editUser(long id, String name, String work, int age) throws SQLException {
@@ -73,7 +90,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     private void createTable() throws SQLException {
         Statement statement = connection.createStatement();
-        statement.execute("create table if not exists users (id bigint auto_increment, name varchar(256), work varchar(256), age int, primary key (id))");
+        statement.execute("create table if not exists users (id bigint auto_increment,role varchar(256), name varchar(256), work varchar(256), age int, primary key (id))");
         statement.close();
     }
 }
