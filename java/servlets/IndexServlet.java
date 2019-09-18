@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/")
+@WebServlet(urlPatterns = {"/", "/login"})
 public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class IndexServlet extends HttpServlet {
                 req.setAttribute("users", UserService.getInstance().getAllUsers());
                 req.getRequestDispatcher("/admin.jsp").forward(req, resp);
             } else if (user.getRole().contains("user") && user.getPassword() == password.hashCode()) {
-                req.getRequestDispatcher("/user.html").forward(req, resp);
+                req.getRequestDispatcher("/user.jsp").forward(req, resp);
             } else {
                 resp.getOutputStream().print("You not have admin permission");
             }
