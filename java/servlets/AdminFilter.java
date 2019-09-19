@@ -24,7 +24,7 @@ public class AdminFilter implements Filter {
         if (user != null && user.getRole().contains("admin")) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            response.sendRedirect(request.getContextPath().split("/admin")[0]);
+            response.sendRedirect("/");
         }
 
 
