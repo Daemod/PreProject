@@ -19,6 +19,7 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
@@ -26,7 +27,9 @@ public class LoginFilter implements Filter {
         if (user != null && user.getPassword() == password.hashCode()) {
             servletRequest.setAttribute("user", user);
             filterChain.doFilter(servletRequest, servletResponse);
-        } else request.getRequestDispatcher("/index.jsp").forward(servletRequest, servletResponse);
+        } else {
+            response.sendRedirect(request.getContextPath().split("/login")[0]);
+        }
     }
 
     @Override
