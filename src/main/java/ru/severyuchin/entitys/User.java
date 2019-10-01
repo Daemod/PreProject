@@ -4,7 +4,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+        @NamedQuery(name = User.GET_ALL_USER, query = "select user from User user"),
+        @NamedQuery(name = User.GET_USER_BY_ID, query = "select user from User user where id = :id")
+
+})
 public class User {
+    public static final String GET_ALL_USER = "User.getAllUser";
+    public static final String GET_USER_BY_ID = "User.getUserById";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,6 +28,9 @@ public class User {
     private int age;
 
     public User() {
+    }
+
+    public User(long id, String name, String work, int age) {
     }
 
     public int getPassword() {

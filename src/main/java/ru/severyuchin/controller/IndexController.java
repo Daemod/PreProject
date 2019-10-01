@@ -1,6 +1,7 @@
 package ru.severyuchin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,16 +14,13 @@ import java.sql.SQLException;
 @Controller
 @RequestMapping("/")
 public class IndexController {
+    @Qualifier("jpaUserService")
     @Autowired
-    UserService service;
+    private UserService service;
 
     @RequestMapping(method = RequestMethod.GET)
     String getPage(Model model) {
-        try {
-            model.addAttribute("users", service.getAllUsers());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        model.addAttribute("users", service.getAllUsers());
         return "admin";
     }
 
