@@ -3,13 +3,14 @@ package ru.severyuchin.dao;
 import ru.severyuchin.entitys.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
+    @PersistenceContext
     private EntityManager entityManager;
 
-    public UserDaoHibernateImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public UserDaoHibernateImpl() {
     }
 
     @Override
