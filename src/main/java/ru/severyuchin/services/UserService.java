@@ -3,12 +3,10 @@ package ru.severyuchin.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.severyuchin.dao.UserDao;
-import ru.severyuchin.dao.UserDaoHibernateImpl;
-import ru.severyuchin.entitys.User;
+import ru.severyuchin.model.User;
 
 import java.util.List;
 
@@ -17,7 +15,7 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserDaoHibernateImpl userDao;
+    UserDao userDao;
 
     public UserService() {
     }

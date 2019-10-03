@@ -1,6 +1,6 @@
 package ru.severyuchin.dao;
 
-import ru.severyuchin.entitys.User;
+import ru.severyuchin.model.User;
 
 import java.util.List;
 

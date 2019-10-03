@@ -1,9 +1,8 @@
 package ru.severyuchin.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.stereotype.Service;
-import ru.severyuchin.entitys.User;
+import ru.severyuchin.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,7 +18,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        return entityManager.createNamedQuery(User.GET_ALL_USER, User.class).getResultList();
+        return entityManager.createQuery("select user from User user", User.class).getResultList();
     }
 
     @Override
@@ -29,16 +28,14 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void deleteUser(long id) {
-        User user = entityManager.createNamedQuery(User.GET_USER_BY_ID, User.class).setParameter("id", id).getSingleResult();
+        User user = entityManager.createQuery("select user from User user where id = :id", User.class)
+                .setParameter("id", id)
+                .getSingleResult();
         entityManager.remove(user);
     }
 
     @Override
     public void editUser(User user) {
-        User oldUser = entityManager.createNamedQuery(User.GET_USER_BY_ID, User.class).setParameter("id", user.getId()).getSingleResult();
-        oldUser.setAge(user.getAge());
-        oldUser.setName(user.getName());
-        oldUser.setWork(user.getWork());
-        entityManager.merge(oldUser);
+        entityManager.merge(user);
     }
 }

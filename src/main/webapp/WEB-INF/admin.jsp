@@ -17,6 +17,7 @@
     <tr>
         <td>id</td>
         <td>Имя:</td>
+        <td>Пароль:</td>
         <td>Работа:</td>
         <td>Возвраст:</td>
     </tr>
@@ -26,6 +27,7 @@
             <form action="editUser" method="post">
                 <input type="hidden" name="id" value="${user.id}">
                 <td><input type="text" name="name" value="${user.name}"></td>
+                <td><input type="password" name="password" value="${user.password}"></td>
                 <td><input type="text" name="work" value="${user.work}"></td>
                 <td><input type="number" name="age" value="${user.age}"></td>
                 <td>

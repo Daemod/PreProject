@@ -7,10 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.severyuchin.entitys.User;
+import ru.severyuchin.model.User;
 import ru.severyuchin.services.UserService;
-
-import java.sql.SQLException;
 
 @Controller
 @RequestMapping("/")
@@ -30,7 +28,7 @@ public class IndexController {
                    @RequestParam(name = "password") String password,
                    @RequestParam(name = "work") String work,
                    @RequestParam(name = "age") int age,
-                   Model model) throws SQLException {
+                   Model model) {
         service.addUser(new User(name,password,work,age));
         model.addAttribute("users", service.getAllUsers());
         return "admin";
@@ -39,10 +37,11 @@ public class IndexController {
     @RequestMapping(value = "/editUser", method = RequestMethod.POST)
     String editUser(@RequestParam(name = "id") Long id,
                     @RequestParam(name = "name") String name,
+                    @RequestParam(name = "password") String password,
                     @RequestParam(name = "work") String work,
                     @RequestParam(name = "age") int age,
                     Model model){
-        service.editUser(new User(id,name,work,age));
+        service.editUser(new User(id,name,password,work,age));
         model.addAttribute("users", service.getAllUsers());
         return "admin";
     }
