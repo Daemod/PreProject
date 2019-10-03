@@ -1,4 +1,4 @@
-package ru.severyuchin.services;
+package ru.severyuchin.service;
 
 
 
