@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.severyuchin.entitys.User;
 import ru.severyuchin.services.UserService;
 
 import java.sql.SQLException;
@@ -30,7 +31,7 @@ public class IndexController {
                    @RequestParam(name = "work") String work,
                    @RequestParam(name = "age") int age,
                    Model model) throws SQLException {
-        service.addUser(name, password, work, age);
+        service.addUser(new User(name,password,work,age));
         model.addAttribute("users", service.getAllUsers());
         return "admin";
     }
@@ -40,15 +41,15 @@ public class IndexController {
                     @RequestParam(name = "name") String name,
                     @RequestParam(name = "work") String work,
                     @RequestParam(name = "age") int age,
-                    Model model) throws SQLException {
-        service.editUser(id, name, work, age);
+                    Model model){
+        service.editUser(new User(id,name,work,age));
         model.addAttribute("users", service.getAllUsers());
         return "admin";
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     String deleteUser(@RequestParam(name = "id") Long id,
-                      Model model) throws SQLException {
+                      Model model){
         service.deleteUser(id);
         model.addAttribute("users", service.getAllUsers());
         return "admin";
