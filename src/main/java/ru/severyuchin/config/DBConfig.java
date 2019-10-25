@@ -11,7 +11,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 @Configuration
 @EnableTransactionManagement
@@ -49,6 +56,73 @@ public class DBConfig {
         factoryBean.setJpaProperties(hibernateProperties());
         factoryBean.afterPropertiesSet();
         return factoryBean.getNativeEntityManagerFactory();
+    }
+
+    @Bean
+    DataSource dataSource() {
+        return new DataSource() {
+            @Override
+            public Connection getConnection() throws SQLException {
+                return getConnection("root", "root");
+            }
+
+            @Override
+            public Connection getConnection(String username, String password) throws SQLException {
+                try {
+                    DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+
+                    StringBuilder url = new StringBuilder();
+
+                    url.
+                            append("jdbc:mysql://").        //db type
+                            append("localhost:").           //host name
+                            append("3306/").                //port
+                            append("db_example?").          //db name
+                            append("user=" + username + "&").          //login
+                            append("password=" + password);       //password
+
+                    return DriverManager.getConnection(url.toString());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    throw new IllegalStateException();
+                }
+            }
+
+            @Override
+            public <T> T unwrap(Class<T> iface) throws SQLException {
+                return null;
+            }
+
+            @Override
+            public boolean isWrapperFor(Class<?> iface) throws SQLException {
+                return false;
+            }
+
+            @Override
+            public PrintWriter getLogWriter() throws SQLException {
+                return null;
+            }
+
+            @Override
+            public void setLogWriter(PrintWriter out) throws SQLException {
+
+            }
+
+            @Override
+            public void setLoginTimeout(int seconds) throws SQLException {
+
+            }
+
+            @Override
+            public int getLoginTimeout() throws SQLException {
+                return 0;
+            }
+
+            @Override
+            public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+                return null;
+            }
+        };
     }
 
 
