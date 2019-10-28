@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table th:each="user : ${users}">
+    <tr>
+        <td th:text="${user.id}"></td>
+        <form th:action="editUser" method="post">
+            <input type="hidden" name="id" th:value="${user.id}">
+            <td><input type="text" name="name" th:value="${user.name}"></td>
+            <td><input type="password" name="password" th:value="${user.password}"></td>
+            <td>
+                <button type="submit" name="submit">Редактировать</button>
+            </td>
+        </form>
+        <form action="deleteUser" method="post">
+            <input type="hidden" name="id" th:value="${user.id}">
+            <td>
+                <button type="submit" name="submit">Удалить</button>
+            </td>
+        </form>
+    </tr>
+</table>
+
+
+</body>
+</html>
