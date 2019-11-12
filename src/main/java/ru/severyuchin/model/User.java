@@ -20,6 +20,8 @@ public class User implements UserDetails {
 
     private String password;
 
+    private String email;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             joinColumns = @JoinColumn(name = "user_id"),
@@ -57,6 +59,18 @@ public class User implements UserDetails {
         return name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -84,4 +98,5 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }

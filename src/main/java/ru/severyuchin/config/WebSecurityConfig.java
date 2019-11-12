@@ -27,8 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/reg**").permitAll() //Todo may be need set *
-                .antMatchers("/admin/*").hasAuthority("ADMIN")
+                .antMatchers("/","/reg**").permitAll()
+                .antMatchers("/bootstrap/css/**").permitAll()
+                .antMatchers("/popper.js/**").permitAll()
+                .antMatchers("/jquery/**").permitAll()
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -37,6 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/")
                 .permitAll();
     }
 
