@@ -12,5 +12,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/jquery/**").addResourceLocations("classpath:/META-INF/resources/webjars/jquery/3.4.1/");
         registry.addResourceHandler("/popper/**").addResourceLocations("classpath:/META-INF/resources/webjars/popper.js/1.15.0/umd/");
         registry.addResourceHandler("/bootstrap/**").addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/4.3.1/");
+        registry.addResourceHandler("/jquery-json/**").addResourceLocations("classpath:/META-INF/resources/webjars/jquery-json/2.6.0/dist/");
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 }

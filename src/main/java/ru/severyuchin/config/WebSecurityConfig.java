@@ -31,7 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/bootstrap/css/**").permitAll()
                 .antMatchers("/popper.js/**").permitAll()
                 .antMatchers("/jquery/**").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/static/js/**").permitAll()
+                .antMatchers("/admin/**","/api/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -44,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .logoutSuccessUrl("/")
                 .permitAll();
+        http.csrf().disable();
     }
 
     @Override
