@@ -1,4 +1,4 @@
-package ru.severyuchin.service;
+package ru.severyuchin.security;
 
 import com.sun.deploy.net.HttpResponse;
 import org.springframework.http.HttpRequest;

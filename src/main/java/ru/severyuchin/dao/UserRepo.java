@@ -6,4 +6,5 @@ import ru.severyuchin.model.User;
 public interface UserRepo extends CrudRepository<User,Long> {
     public User getUserByName(String name);
     public User getUserById(long id);
+    public void deleteUserById(long id);
 }

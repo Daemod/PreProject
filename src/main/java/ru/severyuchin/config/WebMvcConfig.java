@@ -1,6 +1,7 @@
 package ru.severyuchin.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -14,5 +15,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/bootstrap/**").addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/4.3.1/");
         registry.addResourceHandler("/jquery-json/**").addResourceLocations("classpath:/META-INF/resources/webjars/jquery-json/2.6.0/dist/");
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+    }
+
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+
     }
 }

@@ -13,4 +13,5 @@ public interface UserService extends UserDetailsService {
     public List<User> getAllUsers();
     public Set<Role> getRoleByName(String role);
     public User getUserById(long id);
+    public void deleteUserById(long id);
 }

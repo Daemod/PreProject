@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
     public User getUserById(long id) {
         return userRepo.getUserById(id);
     }
+
+    @Override
+    public void deleteUserById(long id) {
+        userRepo.deleteUserById(id);
+    }
 }
